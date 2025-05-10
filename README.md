@@ -1,44 +1,58 @@
 # 🎮 Cadastro de Brinquedos
 
-Este projeto é uma API RESTful construída com **Spring Boot**, voltada para o cadastro de brinquedos em um banco de dados Oracle. A aplicação permite cadastrar informações sobre brinquedos, como nome, tipo, classificação, tamanho e preço, utilizando o Spring Data JPA para persistência.
+API RESTful construída com **Spring Boot**, voltada para o cadastro de brinquedos em um banco de dados Oracle. A aplicação permite registrar informações como nome, tipo, classificação, tamanho e preço dos brinquedos, utilizando o **Spring Data JPA** para persistência.
 
-## Funcionalidades
+---
 
-- Cadastro de brinquedos com as propriedades: nome, tipo, classificação, tamanho e preço.
-- API RESTful com endpoints para realizar o cadastro de brinquedos.
-- Persistência de dados no banco de dados Oracle.
-- Testes podem ser realizados utilizando o **Postman**.
+## ✨ Funcionalidades
+
+- ✅ Cadastro de brinquedos com os atributos:
+  - `nome`
+  - `tipo`
+  - `classificação`
+  - `tamanho`
+  - `preço`
+- 🌐 API RESTful com endpoints para inserção e consulta.
+- 💾 Persistência de dados no banco de dados Oracle.
+- 🧪 Testes de integração via **Postman**.
+
+---
 
 ## 📦 Tecnologias Utilizadas
 
-- **Spring Boot**: Framework para desenvolvimento de aplicações Java.
-- **Spring Web**: Usado para criação da API RESTful.
-- **Spring Data JPA**: Para a persistência de dados utilizando o padrão JPA.
-- **Oracle JDBC Driver**: Para conexão com o banco de dados Oracle.
-- **Spring Boot DevTools**: Ferramentas de desenvolvimento para acelerar o ciclo de desenvolvimento (como reinício automático).
-- **Java 21**: Versão do Java utilizada no desenvolvimento.
-- **Maven**: Gerenciador de dependências e automação de build.
+| Tecnologia              | Descrição                                        |
+|-------------------------|--------------------------------------------------|
+| **Spring Boot**         | Framework principal da aplicação                 |
+| **Spring Web**          | Criação da API REST                              |
+| **Spring Data JPA**     | Persistência no banco usando JPA                 |
+| **Oracle JDBC Driver**  | Conexão com banco de dados Oracle                |
+| **Spring DevTools**     | Suporte ao hot reload durante o desenvolvimento |
+| **Java 21**             | Linguagem utilizada                              |
+| **Maven**               | Gerenciador de dependências                      |
 
-## ⚙️ Dependências do Spring Initializr
+---
 
-Ao criar o projeto no [Spring Initializr](https://start.spring.io/), certifique-se de marcar as seguintes opções:
+## ⚙️ Criação do Projeto com Spring Initializr
 
-- Project: Maven
-- Language: Java
-- Spring Boot: 3.x.x (ou a versão mais recente)
-- Java: 21
+Ao gerar seu projeto no [Spring Initializr](https://start.spring.io/), utilize as seguintes opções:
 
-### Dependências:
+- **Project**: Maven
+- **Language**: Java
+- **Spring Boot**: 3.x.x (ou superior)
+- **Java**: 21
 
-- **Spring Web** – Para criação de APIs REST
-- **Spring Data JPA** – Para integração com banco de dados
-- **Oracle Driver** – Driver JDBC para Oracle
-- **Spring Boot DevTools** – Para recarregamento automático em desenvolvimento
+### ✅ Dependências a incluir:
 
+- `Spring Web`
+- `Spring Data JPA`
+- `Oracle Driver`
+- `Spring Boot DevTools`
 
+---
 
-- 
-As dependências principais no arquivo `pom.xml` são:
+## 📁 Dependências no `pom.xml`
+
+Aqui estão as dependências principais para o funcionamento da aplicação:
 
 ```xml
 <dependencies>
@@ -68,10 +82,11 @@ As dependências principais no arquivo `pom.xml` são:
 </dependencies>
 ```
 
+---
 
-- ## 💾 Configuração do Banco de Dados Oracle
+## 💾 Configuração do Banco de Dados Oracle
 
-No arquivo `src/main/resources/application.properties`, adicione as configurações de conexão com o banco Oracle:
+No arquivo `src/main/resources/application.properties`, adicione:
 
 ```properties
 spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe
@@ -81,37 +96,42 @@ spring.datasource.driverClassName=oracle.jdbc.OracleDriver
 spring.jpa.database-platform=org.hibernate.dialect.Oracle12cDialect
 spring.jpa.hibernate.ddl-auto=update
 ```
+
+---
+
 ## 🚀 Como Rodar a Aplicação
 
-1. Clone este repositório ou baixe o projeto ZIP:
+1. Clone o repositório:
    ```bash
    git clone https://github.com/seu-usuario/seu-repositorio.git
+   ```
 
-2. abra o projeto na sua IDE (IntelliJ IDEA, Eclipse, VS Code, etc.).
+2. Abra o projeto na sua IDE favorita (IntelliJ, Eclipse, VS Code...).
 
-Verifique se o banco de dados Oracle está configurado corretamente.
+3. Certifique-se de que o Oracle DB está ativo e com as credenciais corretas.
 
-Execute a classe principal CadastroBrinquedoApplication.java como uma aplicação Java.
+4. Execute a classe `CadastroBrinquedoApplication.java`.
 
-Após executar, a aplicação estará disponível em:
+5. A aplicação estará disponível em:
+   ```
+   http://localhost:8080
+   ```
 
-http://localhost:8080
+---
 
-## Testando a API com Postman
+## 🧪 Testando a API com Postman
 
-#1. Cadastro de Brinquedo (POST)
-Para cadastrar um brinquedo, envie uma requisição POST para o endpoint http://localhost:8080/cadastrar com o seguinte corpo JSON no Postman:
+### 1️⃣ Cadastrar Brinquedo (POST)
 
-URL: http://localhost:8080/cadastrar
-
-Método: POST
-
-Cabeçalhos:
-
+**URL:** `http://localhost:8080/cadastrar`  
+**Método:** `POST`  
+**Headers:**
+```
 Content-Type: application/json
+```
 
-Corpo (JSON):
-
+**Body (JSON):**
+```json
 {
   "nome": "Carrinho de Controle Remoto",
   "tipo": "Eletrônico",
@@ -119,25 +139,24 @@ Corpo (JSON):
   "tamanho": "Médio",
   "preco": 100.50
 }
+```
 
-
-#2. Resposta Esperada
-Se o brinquedo for cadastrado com sucesso, a resposta será um 201 Created com a seguinte estrutura:
-
-
+**Resposta esperada:**
+```json
 {
   "message": "Brinquedo cadastrado com sucesso"
 }
+```
 
-#3. Consulta de Brinquedos (GET)
-Para listar os brinquedos cadastrados, envie uma requisição GET para http://localhost:8080/brinquedos.
+---
 
-URL: http://localhost:8080/brinquedos
+### 2️⃣ Consultar Brinquedos (GET)
 
-Método: GET
+**URL:** `http://localhost:8080/brinquedos`  
+**Método:** `GET`
 
-Resposta Esperada (Exemplo):
-
+**Resposta esperada:**
+```json
 [
   {
     "id": 1,
@@ -148,3 +167,4 @@ Resposta Esperada (Exemplo):
     "preco": 100.50
   }
 ]
+```
