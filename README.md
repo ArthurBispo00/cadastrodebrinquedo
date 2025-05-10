@@ -168,3 +168,9 @@ Content-Type: application/json
   }
 ]
 ```
+
+## Criadores
+- **João Paulo Moreira dos Santos** - RM 557808
+- **Arthur Bispo de Lima** - RM 557568
+
+**Curso:** Análise e Desenvolvimento de Sistemas - 2TDSPV
