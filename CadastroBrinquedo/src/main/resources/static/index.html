@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Brinquedos</title>
+    <script>
+        async function listarBrinquedos() {
+            const response = await fetch('/brinquedos');
+            const data = await response.json();
+            let lista = '';
+            data.forEach(b => {
+                lista += `<li>${b.id} - ${b.nome} (${b.tipo}) - R$ ${b.preco.toFixed(2)}</li>`;
+            });
+            document.getElementById('lista').innerHTML = lista;
+        }
+
+        async function cadastrarBrinquedo() {
+            const brinquedo = {
+                nome: document.getElementById('nome').value,
+                tipo: document.getElementById('tipo').value,
+                classificacao: document.getElementById('classificacao').value,
+                tamanho: document.getElementById('tamanho').value,
+                preco: parseFloat(document.getElementById('preco').value)
+            };
+
+            await fetch('/brinquedos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(brinquedo)
+            });
+
+            listarBrinquedos();
+        }
+    </script>
+</head>
+<body onload="listarBrinquedos()">
+<h1>Cadastro de Brinquedos</h1>
+<input type="text" id="nome" placeholder="Nome"><br>
+<input type="text" id="tipo" placeholder="Tipo"><br>
+<input type="text" id="classificacao" placeholder="Classificação"><br>
+<input type="text" id="tamanho" placeholder="Tamanho"><br>
+<input type="number" step="0.01" id="preco" placeholder="Preço"><br>
+<button onclick="cadastrarBrinquedo()">Cadastrar</button>
+
+<h2>Lista de Brinquedos</h2>
+<ul id="lista"></ul>
+</body>
+</html>
